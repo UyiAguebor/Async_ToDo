@@ -9,6 +9,7 @@ import { ButtonAdd } from "./components/ButtonAdd";
 import uuid from "react-native-uuid";
 import Dialog from "react-native-dialog";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRef } from "react";
 
 let isFirstRender = true;
 let isLoadUpdate = false;
@@ -17,7 +18,7 @@ export default function App() {
   const [selectedTabName, setSelectedTabName] = useState("all");
   const [isAddDialogDisplayed, setIsAddDialogDisplayed] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
+  const scrollViewRef = useRef();
   useEffect(() => {
     loadTodoList();
   }, []);
@@ -107,6 +108,9 @@ export default function App() {
     setTodoList([...todoList, newTodo]);
     setIsAddDialogDisplayed(false);
     setInputValue("");
+    setTimeout(() => {
+      scrollViewRef.current.scrollToEnd();
+    }, 300);
   }
   function renderAddDialog() {
     return (
@@ -142,7 +146,7 @@ export default function App() {
             <Header />
           </View>
           <View style={s.body}>
-            <ScrollView>{renderTodoList()}</ScrollView>
+            <ScrollView ref={scrollViewRef}>{renderTodoList()}</ScrollView>
           </View>
         </SafeAreaView>
         <ButtonAdd onPress={() => setIsAddDialogDisplayed(true)} />
