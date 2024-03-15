@@ -1,7 +1,7 @@
 # To do List
 
-![alt text](assets/firstpage.png)
-![alt text](assets/addtodo.png)
+<img src="assets/firstpage.png" alt="First Page" width="290"/>
+<img src="assets/addtodo.png" alt="Add To-Do" width="300"/>
 
 ## Features
 
